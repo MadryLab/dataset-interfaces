@@ -21,7 +21,7 @@ construct a dataset interface for a subset of ImageNet and generate counterfactu
 Constructing a dataset interface consists or learning a *class token* for each class in a datset, which can then be included in textual prompts. 
 
 To learn a single token, we use the following function:
-```
+```python
 from dataset_interfaces import run_textual_inversion
 
 embed = run_textual_inversion (
@@ -33,7 +33,7 @@ embed = run_textual_inversion (
 
 Once all the class tokens are learned, we can create a custom tokenizer and text encoder pre-loaded with these tokens:
 
-```
+```python
 import inference_utils as infer_utils
 
 infer_utils.create_encoder (
@@ -47,7 +47,7 @@ infer_utils.create_encoder (
 ## Generating Counterfactual Examples
 
 We can now generate counterfactual examples by incorporating our learned tokens in textual prompts. The ``generate`` function generates images for a specific class in the dataset (indexed in the order that classes are passed when constructing the pre-loaded encoder). When specifying the text prompt, "<TOKEN>" acts as a placeholder for the class token.
-```
+```python
 from dataset_interfaces import generate
 
 generate (
@@ -82,12 +82,12 @@ wget https://huggingface.co/datasets/madrylab/imagenet-star-tokens/resolve/main/
 ```
 To generate images with these tokens, we first create a text encoder pre-loaded with the tokens, which we use to seamlessly integrate the tokens in text prompts:
 
-```
+```python
 token_path = "./tokens". # path to the tokens from HuggingFace
 infer_utils.create_imagenet_star_encoder(token_path, encoder_root="./encoder_root_imagenet")
 ```
 Now, we can generate counterfactual examples of ImageNet from a textual prompt (See the [example notebook](notebooks/Example.ipynb) for a walk-through):
-```
+```python
 from dataset_interfaces import generate
 
 encoder_root = "./encoder_root_imagenet"
@@ -101,7 +101,7 @@ Our benchmark contains images in 23 distribution shifts, with 50k images per shi
 
 We provide a wrapper on top `torchvision.datasets.ImageFolder` to construct a dataset object that filters the images o=un the benchmark using this mask. So, we can make a dataset object for a shift as follows:
 
-```
+```python
 from dataset_interfaces import utils
 
 root = "./imagenet-star"     # the path where the dataset from HuggingFace
