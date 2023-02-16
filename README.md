@@ -5,9 +5,11 @@ This repository contains the code for our recent work:
 **Dataset Interfaces: Diagnosing Model Failures Using Controllable Counterfactual Generation** <br>
 *Joshua Vendrow\*, Saachi Jain\*, Logan Engstrom, Aleksander Madry* <br>
 Paper: [https://arxiv.org/abs/2302.07865](https://arxiv.org/abs/2302.07865) <br>
-Blog post: TBD
+Blog post: [https://gradientscience.org/dataset-interfaces/](https://gradientscience.org/dataset-interfaces/)
 
-FIGURE HERE TODO
+<p>
+<img src="dogs.png" width="1000" >
+</p>
 
 ## Getting started
 Install using pip, or clone our repository.
