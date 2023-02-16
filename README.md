@@ -12,10 +12,7 @@ Blog post: [https://gradientscience.org/dataset-interfaces/](https://gradientsci
 </p>
 
 ## Getting started
-Install using pip, or clone our repository.
-```
-pip install dataset-interfaces
-```
+To begin, clone our repository.
 
 **Example:** For a walkthrough of codebase, check out our [example notebook](notebooks/Example.ipynb). This notebook shows how to
 construct a dataset interface for a subset of ImageNet and generate counterfactual examples. 
@@ -25,7 +22,10 @@ Constructing a dataset interface consists or learning a *class token* for each c
 
 To learn a single token, we use the following function:
 ```
-from dataset_interfaces import run_textual_inversion
+import sys
+sys.path.append('../dataset_interfaces')
+
+from textual_inversion import run_textual_inversion
 
 embed = run_textual_inversion (
     train_path=train_path,  # path to directory with training set for a single class
@@ -37,7 +37,7 @@ embed = run_textual_inversion (
 Once all the class tokens are learned, we can create a custom tokenizer and text encoder pre-loaded with these tokens:
 
 ```
-from dataset_interfaces import create_token_dictionary
+import inference_utils as infer_utils
 
 infer_utils.create_token_dictionary (
     embeds=embeds,             # list of learned embeddings (from the code block above)
@@ -51,7 +51,7 @@ infer_utils.create_token_dictionary (
 
 We can now generate counterfactual examples by incorporating our learned tokens in textual prompts. The ``generate`` function generates images for a specific class in the dataset (indexed in the order that classes are passed when constructing the pre-loaded encoder). When specifying the text prompt, "<TOKEN>" acts as a placeholder for the class token.
 ```
-from dataset_interfaces import generate
+from generate import generate
 
 generate (
     encoder_root=encoder_root,
@@ -69,8 +69,6 @@ To directly evaluate the quality of the generated image, we use *CLIP similarity
 We can measure CLIP similarity between a set of generated images and a given caption as follows:
 
 ```
-import dataset_interfaces.inference_utils as infer_utils
-
 sim_class = infer_utils.clip_similarity(imgs, "a photo of a dog")
 sim_shift = infer_utils.clip_similarity(imgs, "a photo in the grass")
 ```
