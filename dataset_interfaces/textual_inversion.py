@@ -26,8 +26,8 @@ from PIL import Image
 from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
-from utils import load_initializer_text, SplitEmbedding
-from templates import imagenet_templates_small, imagenet_style_templates_small
+from dataset_interfaces import utils
+from dataset_interfaces.templates import imagenet_templates_small, imagenet_style_templates_small
 
 logger = get_logger(__name__)
 
@@ -189,7 +189,7 @@ def run_textual_inversion(
 
     initializer_token_standin = token + "_init"
     # Convert the initializer_token, placeholder_token to ids
-    initializer_token_id = load_initializer_text(text_encoder, tokenizer, 
+    initializer_token_id = utils.load_initializer_text(text_encoder, tokenizer, 
                                                  class_name, 
                                                  initializer_token_standin)
     # Add the placeholder token in tokenizer
@@ -233,7 +233,7 @@ def run_textual_inversion(
         mag_targets = torch.tensor([initializer_token_id])
     else:
         mag_targets = None
-    new_emb = SplitEmbedding(num_orig_embs, 1, emb_dim, magnitude_targets=mag_targets)
+    new_emb = utils.SplitEmbedding(num_orig_embs, 1, emb_dim, magnitude_targets=mag_targets)
     new_emb.initialize_from_embedding(text_encoder.text_model.embeddings.token_embedding)
     text_encoder.text_model.embeddings.token_embedding = new_emb
     

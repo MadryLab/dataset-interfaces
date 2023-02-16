@@ -66,12 +66,12 @@ class SplitEmbedding(nn.Module):
     
 class ImageNet_Star_Dataset(ImageFolder):
     
-    def __init__(self, path, dat="base", mask_path=None, transform=None):
+    def __init__(self, path, shift="base", mask_path=None, transform=None):
             
-        super().__init__(os.path.join(path, dat), transform=transform)
+        super().__init__(os.path.join(path, shift), transform=transform)
         
         if mask_path is not None:
-            self.mask = np.load(mask_path, allow_pickle=True).item()[dat]
+            self.mask = np.load(mask_path, allow_pickle=True).item()[shift]
             self.mask_indices = np.arange(len(self.mask))[self.mask==1]
         else:
             self.mask = None

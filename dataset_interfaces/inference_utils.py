@@ -5,6 +5,9 @@ import open_clip
 import time
 import os
 
+from dataset_interfaces.imagenet_utils import IMAGENET_COMMON_CLASS_NAMES
+
+
 def get_pipe(text_encoder=None, tokenizer=None, model_name='stabilityai/stable-diffusion-2', v2=True):
     #@title Load the Stable Diffusion pipeline
     
@@ -66,7 +69,7 @@ def create_token_dictionary_root(tokens_root, encoder_root, class_names, text_en
     torch.save({'initializer_words': class_names, 'tokens': placeholder_tokens}, f'{encoder_root}/tokens.pt')
 
     
-def create_token_dictionary(embeds, tokens, class_names, encoder_root, model_name='stabilityai/stable-diffusion-2'):
+def create_encoder(embeds, tokens, class_names, encoder_root, model_name='stabilityai/stable-diffusion-2'):
 
     tokenizer = get_tokenizer(model_name=model_name)
     text_encoder = get_text_encoder(model_name=model_name)
@@ -81,6 +84,15 @@ def create_token_dictionary(embeds, tokens, class_names, encoder_root, model_nam
     tokenizer.save_pretrained(f"{encoder_root}/tokenizer")
     text_encoder.save_pretrained(f"{encoder_root}/text_encoder")
     torch.save({'initializer_words': class_names, 'tokens': placeholder_tokens}, f'{encoder_root}/tokens.pt')
+
+    
+def create_imagenet_star_encoder(path, encoder_root):
+    
+    embeds = [torch.load(os.path.join(path, f"{i}.bin")) for i in range(1000)]
+    class_names = IMAGENET_COMMON_CLASS_NAMES
+    tokens = [f"<{class_names[i]}-{i}>" for i in range(len(class_names))]
+    
+    create_encoder(embeds=embeds, tokens=tokens, class_names=class_names, encoder_root="./encoder_root_imagenet")
 
     
 def load_clip_model(

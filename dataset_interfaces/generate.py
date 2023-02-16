@@ -2,8 +2,8 @@ import torch
 import numpy as np
 import os
 import h5py
-import inference_utils as infer_utils
-from imagenet_utils import IMAGENET_COMMON_CLASS_NAMES
+import dataset_interfaces.inference_utils as infer_utils
+from dataset_interfaces.imagenet_utils import IMAGENET_COMMON_CLASS_NAMES
 
 import json
 from tqdm import tqdm
