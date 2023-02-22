@@ -1,4 +1,3 @@
-from setuptools import setup
 from setuptools import setup, find_packages
 
 # read the contents of your README file
@@ -22,6 +21,7 @@ setup(
     install_requires=['torch',
                       'numpy',  
                       'torchvision',
-                      'scipy'
+                      'diffusers',
+                      'transformers'
                       ],
 )
