@@ -17,6 +17,12 @@ To begin, clone our repository.
 **Example:** For a walkthrough of codebase, check out our [example notebook](notebooks/Example.ipynb). This notebook shows how to
 construct a dataset interface for a subset of ImageNet and generate counterfactual examples. 
 
+Before running `run_textual_inverson`, initialize an [🤗Accelerate](https://github.com/huggingface/accelerate/) environment with:
+
+```bash
+accelerate config
+```
+
 ## Constructing a Dataset Interface
 Constructing a dataset interface consists or learning a *class token* for each class in a datset, which can then be included in textual prompts. 
 

@@ -23,5 +23,6 @@ setup(
                       'torchvision',
                       'diffusers',
                       'transformers'
+                      'accelerate'
                       ],
 )
