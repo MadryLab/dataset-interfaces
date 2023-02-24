@@ -4,6 +4,7 @@ from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
 import open_clip
 import time
 import os
+import tqdm
 
 from dataset_interfaces.imagenet_utils import IMAGENET_COMMON_CLASS_NAMES
 
@@ -76,7 +77,7 @@ def create_encoder(embeds, tokens, class_names, encoder_root, model_name='stabil
     
     placeholder_tokens = []
     
-    for i in range(len(class_names)):
+    for i in tqdm.trange(len(class_names)):
         
         load_emb_in_token(text_encoder, tokenizer, tokens[i], embeds[i])
         placeholder_tokens.append(tokens[i])

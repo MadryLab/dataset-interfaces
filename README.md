@@ -37,7 +37,7 @@ embed = run_textual_inversion (
 )
 ```
 
-Once all the class tokens are learned, we can create a custom tokenizer and text encoder pre-loaded with these tokens:
+Once all the class tokens are learned, we can create a custom tokenizer and text encoder with these tokens:
 
 ```python
 import inference_utils as infer_utils
@@ -52,7 +52,7 @@ infer_utils.create_encoder (
 
 ## Generating Counterfactual Examples
 
-We can now generate counterfactual examples by incorporating our learned tokens in textual prompts. The ``generate`` function generates images for a specific class in the dataset (indexed in the order that classes are passed when constructing the pre-loaded encoder). When specifying the text prompt, "<TOKEN>" acts as a placeholder for the class token.
+We can now generate counterfactual examples by incorporating our learned tokens in textual prompts. The ``generate`` function generates images for a specific class in the dataset (indexed in the order that classes are passed when constructing the encoder). When specifying the text prompt, "<TOKEN>" acts as a placeholder for the class token.
 ```python
 from dataset_interfaces import generate
 
@@ -86,7 +86,7 @@ The 1,000 learned tokens are avaiable on [HuggingFace](https://huggingface.co/da
 ```
 wget https://huggingface.co/datasets/madrylab/imagenet-star-tokens/resolve/main/tokens.zip
 ```
-To generate images with these tokens, we first create a text encoder pre-loaded with the tokens, which we use to seamlessly integrate the tokens in text prompts:
+To generate images with these tokens, we first create a text encoder with the tokens, which we use to seamlessly integrate the tokens in text prompts:
 
 ```python
 token_path = "./tokens". # path to the tokens from HuggingFace
