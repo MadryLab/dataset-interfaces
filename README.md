@@ -12,7 +12,10 @@ Blog post: [https://gradientscience.org/dataset-interfaces/](https://gradientsci
 </p>
 
 ## Getting started
-To begin, clone our repository.
+Install using pip, or clone our repository.
+```
+pip install dataset-interfaces
+```
 
 **Example:** For a walkthrough of codebase, check out our [example notebook](notebooks/Example.ipynb). This notebook shows how to
 construct a dataset interface for a subset of ImageNet and generate counterfactual examples. 

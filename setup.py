@@ -8,9 +8,9 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='dataset_interfaces',
-    version='0.0.1',    
+    version='0.1.0',    
     description='Dataset Interfaces',
-    url='https://github.com/MadryLab/dataset-interfacees',
+    url='https://github.com/MadryLab/dataset-interfaces',
     author='MadryLab',
     author_email='jvendrow@mit.edu',
     license = 'MIT',
@@ -22,7 +22,7 @@ setup(
                       'numpy',  
                       'torchvision',
                       'diffusers',
-                      'transformers'
+                      'transformers',
                       'accelerate'
                       ],
 )
